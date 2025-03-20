@@ -108,7 +108,7 @@
 ### 3. [Newman Command Options](https://learning.postman.com/docs/collections/using-newman-cli/newman-options/)
 
 - -d --data
-- -d --environment
+- -e --environment
 - -k --insecure
 - --folder
 - --bail
