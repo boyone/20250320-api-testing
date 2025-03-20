@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "9a09fc3a-7d36-4d58-a04e-d9242207373a",
+		"name": "checkout_product_success",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3572919",
+		"_collection_link": "https://api-team-2746.postman.co/workspace/46729304-1ec4-4f30-91c4-d9a372d276cd/collection/3572919-9a09fc3a-7d36-4d58-a04e-d9242207373a?action=share&source=collection_link&creator=3572919"
+	},
+	"item": [
+		{
+			"name": "product_list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"pm.test(\"จำนวน สินค้าทั้งหมด ต้องเท่ากับ 2\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.total).to.eql(2);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"const product = jsonData.products.find(product => product.product_name === \"43 Piece dinner Set\");",
+							"",
+							"pm.test('ชื่อสินค้าตัวที่ 2 ต้องเท่ากับ \"43 Piece dinner Set\"', function () {",
+							"    pm.expect(product.product_name).to.eql(\"43 Piece dinner Set\");",
+							"});",
+							"",
+							"pm.test('ราคาสินค้าตัวที่ 2 ต้องเท่ากับ 12.95', function () {",
+							"    pm.expect(product.product_price).to.eql(12.95);",
+							"});",
+							"",
+							"pm.test('ชื่อรูปภาพสินค้าตัวที่ 2 ต้องเท่ากับ \"/43_Piece_dinner_Set.png\"', function () {",
+							"    pm.expect(product.product_image).to.eql(\"/43_Piece_dinner_Set.png\");",
+							"});",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/product",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product_detail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"const product_price = Number(pm.variables.get(\"product_price\"));",
+							"const product_id = Number(pm.variables.get(\"id\"));",
+							"",
+							"pm.test(\"ราคาสินค้าตัวที่ \" + product_id + \" ต้องเท่ากับ \" + product_price, function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.product_price).to.eql(product_price);",
+							"});",
+							"",
+							"pm.test('ราคาสินค้าตัวที่ 2 ต้องเท่ากับ \"10\"', function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.quantity).to.eql(\"10\");",
+							"});",
+							"",
+							"pm.test('แบรนด์สินค้าตัวที่ 2 ต้องเท่ากับ \"CoolKidz\"', function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.product_brand).to.eql(\"CoolKidz\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/product/{{id}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"product",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submit_order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"pm.test(\"ราคารวมจากการสั่งซื้อต้องเท่ากับ 14.95\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.total_price).to.eql(14.95);",
+							"});",
+							"",
+							"pm.test(\"Order ID จากการสั่งซื้อต้องไม่เท่ากับค่าว่าง\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.order_id).to.not.undefined;",
+							"",
+							"    pm.collectionVariables.set(\"order_id\", jsonData.order_id);",
+							"});",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"cart\": [\n    {\n      \"product_id\": 2,\n      \"quantity\": 1\n    }\n  ],\n  \"shipping_method\": \"Kerry\",\n  \"shipping_address\": \"405/37 ถ.มหิดล\",\n  \"shipping_sub_district\": \"ท่าศาลา\",\n  \"shipping_district\": \"เมือง\",\n  \"shipping_province\": \"เชียงใหม่\",\n  \"shipping_zip_code\": \"50000\",\n  \"recipient_name\": \"ณัฐญา ชุติบุตร\",\n  \"recipient_phone_number\": \"0970809292\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/order",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm_payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"const order_id = pm.collectionVariables.get(\"order_id\");",
+							"",
+							"pm.test(\"notify_message ต้องเท่ากับ วันเวลาที่ชำระเงิน 1/3/2020 13:30:00 หมายเลขคำสั่งซื้อ \"+ order_id +\" คุณสามารถติดตามสินค้าผ่านช่องทาง Kerry หมายเลข 1785261900\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.notify_message).to.eql(\"วันเวลาที่ชำระเงิน 1/3/2020 13:30:00 หมายเลขคำสั่งซื้อ \"+ order_id +\" คุณสามารถติดตามสินค้าผ่านช่องทาง Kerry หมายเลข 1785261900\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"order_id\": {{order_id}},\n  \"payment_type\": \"credit\",\n  \"type\": \"visa\",\n  \"card_number\": \"4719700591590995\",\n  \"cvv\": \"752\",\n  \"expired_month\": 7,\n  \"expired_year\": 20,\n  \"card_name\": \"Karnwat Wongudom\",\n  \"total_price\": 14.95\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/confirmPayment",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"confirmPayment"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "order_id",
+			"value": ""
+		},
+		{
+			"key": "id",
+			"value": "2",
+			"type": "default"
+		},
+		{
+			"key": "product_price",
+			"value": "12.95",
+			"type": "string"
+		}
+	]
+}
