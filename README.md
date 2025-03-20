@@ -72,9 +72,9 @@
 
 ### 4. Working with XML(Response's body): [store-service-stub v1](https://github.com/boyone/store-service-stub)
 
-    ```js
-    const responseJson = xml2Json(pm.response.text());
-    ```
+```js
+const responseJson = xml2Json(pm.response.text());
+```
 
 ### 5. Authentication and Authorization: [store-service-stub v2](https://github.com/boyone/store-service-stub)
 
@@ -91,19 +91,19 @@
 
 ### 1. Install
 
-    ```sh
-    npm install -g newman
-    ```
+```sh
+npm install -g newman
+```
 
 ### 2. Run Newman
 
-    ```sh
-    newman run my-collection.json [options]
-    ```
+```sh
+newman run my-collection.json [options]
+```
 
-    ```sh
-    newman run -h
-    ```
+```sh
+newman run -h
+```
 
 ### 3. [Newman Command Options](https://learning.postman.com/docs/collections/using-newman-cli/newman-options/)
 
@@ -123,35 +123,35 @@
 - progress
 - emojitrain
 
-      ```sh
-      newman run my-collection.json -r cli,json
-      ```
+  ```sh
+  newman run my-collection.json -r cli,json
+  ```
 
 #### External Reporters
 
 - html
 
-      ```sh
-      npm install -g newman-reporter-html
-      ```
-      ```sh
-      newman run my-collection.json -r html
-      ```
+  ```sh
+  npm install -g newman-reporter-html
+  ```
+
+  ```sh
+  newman run my-collection.json -r html
+  ```
 
 - htmlextra
 
-      ```sh
-      npm install -g newman-reporter-htmlextra
-      ```
-      ```sh
-      newman run my-collection.json -r htmlextra
-      ```
+  ```sh
+  npm install -g newman-reporter-htmlextra
+  ```
+
+  ```sh
+  newman run my-collection.json -r htmlextra
+  ```
 
 ### 5. [Newman with Docker](https://learning.postman.com/docs/collections/using-newman-cli/newman-with-docker/)
 
 ---
-
-## 5. Makefile
 
 ## 6. OpenAPI
 
