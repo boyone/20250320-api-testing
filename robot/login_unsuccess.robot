@@ -13,6 +13,14 @@ Library    SeleniumLibrary
     ต้องเจอข้อความ    Error Page 
     ปิดหน้า Web
 
+ล็อคอินเข้าระบบด้วยโดยไม่กรอก username และกรอก password ที่ไม่ถูกต้อง จะต้องเจอ Error Page
+    เปิดหน้า Web
+    กรอก username    ${EMPTY}
+    กรอก password    Plam1
+    กดปุ่ม Login
+    ต้องเจอข้อความ    Error Page 
+    ปิดหน้า Web
+
 *** Keywords ***
 เปิดหน้า Web
     Open Browser    url=https://www.dminer.in.th    browser=chrome
