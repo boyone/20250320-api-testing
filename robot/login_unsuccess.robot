@@ -10,7 +10,7 @@ Library    SeleniumLibrary
     กรอก username    adminPlam
     กรอก password    Plam1
     กดปุ่ม Login
-    ต้องเจอข้อความ Error Page 
+    ต้องเจอข้อความ    Error Page 
     ปิดหน้า Web
 
 *** Keywords ***
@@ -29,8 +29,9 @@ Library    SeleniumLibrary
 กดปุ่ม Login
     Click Button    id=login_button
 
-ต้องเจอข้อความ Error Page
-    Wait Until Element Contains    id=container    text=Error Page
+ต้องเจอข้อความ
+    [Arguments]    ${message}
+    Wait Until Element Contains    id=container    text=${message}
 
 ปิดหน้า Web
     Close Browser
