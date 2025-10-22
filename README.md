@@ -190,4 +190,8 @@ newman run -h
 
 ### [Postman Flows](https://learning.postman.com/docs/postman-flows/overview/)
 
-### [newman-reporter-influxdb](npm install -g newman-reporter-influxdb)
+### [newman-reporter-influxdb](https://github.com/vs4vijay/newman-reporter-influxdb)
+
+    ```sh
+    npm install -g newman-reporter-influxdb
+    ```
